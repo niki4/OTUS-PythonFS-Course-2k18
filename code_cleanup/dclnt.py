@@ -65,18 +65,19 @@ def get_all_words_in_path(path):
 
     def split_snake_case_name_to_words(name):
         return [n for n in name.split('_') if n]
-    return flat([split_snake_case_name_to_words(function_name) for function_name in function_names])
+    return flat([split_snake_case_name_to_words(function_name)
+                 for function_name in function_names])
 
 
 def get_top_verbs_in_path(path, top_size=10):
     global Path
     Path = path
     trees = [t for t in get_trees(None) if t]
-    fncs = [f for f in flat([[node.name.lower()
-                              for node in ast.walk(t) if isinstance(node, ast.FunctionDef)] for t in trees])
-            if not (f.startswith('__') and f.endswith('__'))]
+    fncs = [f for f in flat([[node.name.lower() for node in ast.walk(t) if isinstance(
+        node, ast.FunctionDef)] for t in trees]) if not (f.startswith('__') and f.endswith('__'))]
     print('functions extracted')
-    verbs = flat([get_verbs_from_function_name(function_name) for function_name in fncs])
+    verbs = flat([get_verbs_from_function_name(function_name)
+                  for function_name in fncs])
     return collections.Counter(verbs).most_common(top_size)
 
 
