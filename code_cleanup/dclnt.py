@@ -2,7 +2,8 @@ import ast
 import os
 import collections
 
-from nltk import pos_tag
+import nltk
+nltk.download('averaged_perceptron_tagger')
 
 
 def flat(_list):
@@ -13,7 +14,7 @@ def flat(_list):
 def is_verb(word):
     if not word:
         return False
-    pos_info = pos_tag([word])
+    pos_info = nltk.pos_tag([word])
     return pos_info[0][1] == 'VB'
 
 
