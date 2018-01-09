@@ -15,8 +15,7 @@ def is_verb(word):
     if not word:
         return False
     pos_info = nltk.pos_tag([word])
-    print('pos_info', pos_info)
-    return pos_info[0][1] == 'VB'
+    return pos_info[0][1] in ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']
 
 
 def get_files(path):
@@ -49,7 +48,7 @@ def get_trees(path, with_filenames=False, with_file_content=False):
                 trees.append((filename, tree))
         else:
             trees.append(tree)
-    print('trees generated')
+    print('trees generated', len(trees))
     return trees
 
 
@@ -76,10 +75,10 @@ def get_top_verbs_in_path(path, top_size=10):
     trees = [t for t in get_trees(path) if t]
     functions = [f for f in flat([[node.name.lower() for node in ast.walk(t) if isinstance(
         node, ast.FunctionDef)] for t in trees]) if not (f.startswith('__') and f.endswith('__'))]
-    print('functions extracted', list(functions))
+    print('functions extracted', len(functions))
     verbs = flat([get_verbs_from_function_name(function_name)
                   for function_name in functions])
-    print('verbs extracted', list(verbs))
+    print('verbs extracted', len(verbs))
     return collections.Counter(verbs).most_common(top_size)
 
 
