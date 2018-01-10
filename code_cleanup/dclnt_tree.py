@@ -4,7 +4,8 @@ import os
 
 class Tree:
 
-    def get_files(self, path):
+    @staticmethod
+    def get_files(path):
         py_files = []
         for dirpath, dirnames, filenames in os.walk(path, topdown=True):
             for file in filenames:
@@ -15,9 +16,10 @@ class Tree:
         print('total %s files' % len(py_files))
         return py_files
 
-    def get_trees(self, path, with_filenames=False, with_file_content=False):
+    @classmethod
+    def get_trees(cls, path, with_filenames=False, with_file_content=False):
         trees = []
-        py_files = self.get_files(path)
+        py_files = cls.get_files(path)
         for filename in py_files:
             with open(filename, encoding='utf-8') as attempt_handler:
                 main_file_content = attempt_handler.read()
