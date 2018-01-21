@@ -11,11 +11,13 @@ class Word:
         return sum([list(item) for item in _list], [])
 
     def get_all_names(self, tree):
-        return [node.id for node in ast.walk(tree) if isinstance(node, ast.Name)]
+        return [node.id for node in ast.walk(tree)
+                if isinstance(node, ast.Name)]
 
     def get_all_words_in_path(self, path):
         trees = [t for t in Tree.get_trees(path) if t]
-        function_names = [f for f in self.flat([self.get_all_names(t) for t in trees])
+        function_names = [f for f in self.flat(
+            [self.get_all_names(t) for t in trees])
                           if not (f.startswith('__') and f.endswith('__'))]
 
         def split_snake_case_name_to_words(name):
