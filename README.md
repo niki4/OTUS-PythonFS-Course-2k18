@@ -13,7 +13,8 @@ G:\py_literal>python analyzer.py
 [nltk_data]     C:\Users\User\AppData\Roaming\nltk_data...
 [nltk_data]   Package averaged_perceptron_tagger is already up-to-
 [nltk_data]       date!
-No projects to analyze specified. Going over current dir: ['.git', '.gitignore', '.idea', 'flask', 'libs', 'requests', '
+No projects to analyze specified.
+Going over current dir: ['.git', '.gitignore', '.idea', 'flask', 'libs', 'requests', '
 __pycache__']
 ...
 total 22 words, 22 unique
@@ -43,12 +44,12 @@ total 22 words, 22 unique
 
 Another way is to specify path(s) to folders with source code you are need to go through using the script.
 ```
-G:\py_literal>python analyzer.py ./flask ./flask
+G:\py_literal>python analyzer.py ./flask ./requests
 [nltk_data] Downloading package averaged_perceptron_tagger to
 [nltk_data]     C:\Users\User\AppData\Roaming\nltk_data...
 [nltk_data]   Package averaged_perceptron_tagger is already up-to-
 [nltk_data]       date!
-Here I got: ['./flask', './flask']
+Analyzing these projects: ['./flask', './requests']
 total 77 files
 trees generated 77
 functions extracted 1228
@@ -56,6 +57,7 @@ functions extracted 1228
 ```
 
 In fact, the script may consume parameters in different formats (relative or absolute), plus you may specify as many projects dirs as you want:
+
 E.g., this also works:
 ```
 G:\py_literal>python analyzer.py flask requests
