@@ -1,19 +1,21 @@
 import os
+import sys
 import collections
 
-from stat import Statistic
-
-import nltk
-nltk.download('averaged_perceptron_tagger')
-
+from libs.stat import Statistic
 
 stat = Statistic()
 
 top_size = 200
 words = []
-projects = [os.listdir('.')]
+if len(sys.argv) > 1:
+    projects = sys.argv[1:]            # If there target folder in command line, use it...
+    print('Analyzing these projects:', sys.argv[1:])
+else:
+    projects = next(os.walk('.'))[1]  # ...otherwise scan for folders in current script location
+    print('No projects to analyze specified. Going over current dir:', projects)
 
-for project in projects:
+for project in list(projects):
     p_path = os.path.join(os.curdir, project)
     words += stat.get_top_verbs_in_path(p_path)
 
