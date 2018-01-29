@@ -13,7 +13,7 @@ if len(sys.argv) > 1:
     print('Analyzing these projects:', sys.argv[1:])
 else:
     projects = next(os.walk('.'))[1]  # ...otherwise scan for folders in current script location
-    print('No projects to analyze specified. Going over current dir:', projects)
+    print('No projects to analyze specified.\nGoing over current dir:', projects)
 
 for project in list(projects):
     p_path = os.path.join(os.curdir, project)
