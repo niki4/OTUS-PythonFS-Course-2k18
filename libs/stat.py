@@ -1,7 +1,7 @@
 import ast
 import collections
 
-from .parser import Tree
+from libs.parser import Tree
 
 import nltk
 nltk.download('averaged_perceptron_tagger')

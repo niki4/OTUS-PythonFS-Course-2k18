@@ -1,6 +1,6 @@
 import ast
 
-from .parser import Tree
+from libs.parser import Tree
 
 
 class Word:
