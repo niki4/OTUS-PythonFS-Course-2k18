@@ -17,7 +17,7 @@ else:
 for project in list(projects):
     p_path = os.path.join(os.curdir, project)
     print('-'*30 + '\nAnalyzing', p_path)
-    words += stat.get_top_verbs_in_path(p_path)
+    words.extend(stat.get_top_verbs_in_path(p_path))
 
 print('='*30 + '\nTotal %s words, %s unique' % (len(words), len(set(words))))
 for word, occurrence in collections.Counter(words).most_common(top_size):
