@@ -18,11 +18,11 @@ def get_top_verbs_in_path(path, words_count=10):
         [[node.name.lower() for node in ast.walk(t)
           if isinstance(node, ast.FunctionDef)] for t in trees])
                  if not (f.startswith('__') and f.endswith('__'))]
-    print('functions extracted', len(functions))
+    print('%s functions extracted' % len(functions))
     verbs = flat(
         [get_verbs_from_function_name(function_name)
          for function_name in functions])
-    print('verbs extracted', len(verbs))
+    print('%s verbs extracted' % len(verbs))
     return collections.Counter(verbs).most_common(words_count)
 
 
