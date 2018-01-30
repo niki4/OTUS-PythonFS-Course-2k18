@@ -3,6 +3,13 @@ Simple words (literals) analyzer created as part of OTUS Python Full Stack Devel
 
 The script helps to define statistic for words (verbs) usage in your (or someones) source code.
 
+# Installation
+Just clone this repository using your favourite Git client or Download and unpack zip archive at your PC (hint: use green button 'Clone or download' at the top right corner of this Github page), e.g.:
+```
+git clone https://github.com/niki4/py_literal.git
+```
+That's it. Now follow to the "Usage" section.
+
 # Usage
 Either run the script without any params, in that case it will just scan for subdirs placed in the same directory as the script. 
 
