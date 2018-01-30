@@ -2,12 +2,11 @@ import os
 import sys
 import collections
 
-from libs.stat import Statistic
-
-stat = Statistic()
+from libs import stat
 
 top_size = 200
 words = []
+
 if len(sys.argv) > 1:
     projects = sys.argv[1:]            # If there target folder in command line, use it...
     print('Analyzing these projects:', sys.argv[1:])
@@ -17,8 +16,9 @@ else:
 
 for project in list(projects):
     p_path = os.path.join(os.curdir, project)
+    print('-'*30 + '\nAnalyzing', p_path)
     words += stat.get_top_verbs_in_path(p_path)
 
-print('total %s words, %s unique' % (len(words), len(set(words))))
+print('='*30 + '\nTotal %s words, %s unique' % (len(words), len(set(words))))
 for word, occurrence in collections.Counter(words).most_common(top_size):
     print(word, occurrence)
