@@ -8,8 +8,6 @@ def get_files(path):
         for file in filenames:
             if file.endswith('.py'):
                 py_files.append(os.path.join(dirpath, file))
-                if len(py_files) == 100:
-                    break
     print('total %s files' % len(py_files))
     return py_files
 
