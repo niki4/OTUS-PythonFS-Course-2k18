@@ -1,5 +1,5 @@
 import os
-import sys
+import argparse
 import collections
 
 from libs import stat
@@ -7,14 +7,17 @@ from libs import stat
 top_size = 200
 words = []
 
-if len(sys.argv) > 1:
-    projects = sys.argv[1:]            # If there target folder in command line, use it...
-    print('Analyzing these projects:', sys.argv[1:])
-else:
-    projects = next(os.walk('.'))[1]  # ...otherwise scan for folders in current script location
-    print('No projects to analyze specified.\nGoing over current dir:', projects)
+cli_parser = argparse.ArgumentParser()
+cli_parser.add_argument('-p', '--project', nargs='*', help='Project folder name(s) or path(s) to analyze')
+cli_opts = cli_parser.parse_args()
 
-for project in list(projects):
+projects = cli_opts.project
+
+if not projects:
+    projects = next(os.walk('.'))[1]
+    print('No projects to analyze were specified.\nI will analyze all subdirs of current dir:', projects)
+
+for project in projects:
     p_path = os.path.join(os.curdir, project)
     print('-'*30 + '\nAnalyzing', p_path)
     words.extend(stat.get_top_verbs_in_path(p_path))
