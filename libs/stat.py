@@ -13,11 +13,10 @@ def extract_literals(raw_words):
 
 
 def get_top_verbs_in_path(path, words_count=10):
-    trees = [t for t in parser.get_trees(path) if t]
+    trees = parser.get_trees(path)
     functions = [f for f in extract_literals([[node.name.lower() for node in ast.walk(t)
                                                if isinstance(node, ast.FunctionDef)] for t in trees])
                  if not (f.startswith('__') and f.endswith('__'))]
-    print('%s functions extracted' % len(functions))
     verbs = extract_literals([get_verbs_from_function_name(function_name)
                               for function_name in functions])
     print('%s verbs extracted' % len(verbs))

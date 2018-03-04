@@ -12,22 +12,11 @@ def get_files(path):
     return py_files
 
 
-def get_trees(path, with_filenames=False, with_file_content=False):
+def get_trees(path):
     trees = []
     py_files = get_files(path)
     for filename in py_files:
-        with open(filename, encoding='utf-8') as attempt_handler:
-            try:
-                tree = ast.parse(attempt_handler.read())
-            except SyntaxError as exc_info:
-                raise SyntaxError('Syntax Error %s' % exc_info)
-
-            if with_filenames:
-                if with_file_content:
-                    trees.append((filename, attempt_handler.read(), tree))
-                else:
-                    trees.append((filename, tree))
-            else:
-                trees.append(tree)
-    print('%s trees generated' % len(trees))
+        with open(filename, encoding='utf-8') as file:
+            tree = ast.parse(file.read())
+            trees.append(tree)
     return trees
